@@ -63,4 +63,12 @@ public class Character2Script : MonoBehaviour {
 		//Adding the velocity to the object's overall position
 		transform.position+=velocity;
 	}
+
+	void OnCollisionEnter(Collision col){
+		//If players are colliding then we mimic a somewhat inelastic collision by swapping their velocities and setting them to 80%
+		if (col.gameObject.tag == "Player") {
+			Vector3 otherPos = col.transform.position;
+			col.gameObject.GetComponent<Character1Script> ().velocity = ((transform.position-otherPos).normalized)*velocity.magnitude*-.8f;
+		}
+	}
 }
