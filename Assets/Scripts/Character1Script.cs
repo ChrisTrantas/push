@@ -18,7 +18,7 @@ public class Character1Script : MonoBehaviour
     private float health;
     private float speed = 1.0f;
 
-    private Stack<Item> itemStack;
+    private Stack<Item> itemStack = new Stack<Item>();
 
     public void ApplyItem(Item item)
     {
