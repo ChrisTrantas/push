@@ -132,6 +132,7 @@ public class Character1Script : MonoBehaviour
         //Clamping the velocity so players can't go too fast
         Vector3.ClampMagnitude(velocity, 1);
 
+
         //Adding the acceleration from this update to the overall velocity.
         velocity += acceleration * speed;
 
@@ -158,6 +159,11 @@ public class Character1Script : MonoBehaviour
                 Vector3 tempVec = col.gameObject.GetComponent<Character1Script>().velocity;
                 col.gameObject.GetComponent<Character1Script>().ResolveBounce(((col.transform.position - transform.position).normalized) * velocity.magnitude * .8f);
                 ResolveBounce(((transform.position - col.transform.position).normalized) * tempVec.magnitude * .8f);
+            }
+            if (col.gameObject.tag == "freeze")
+            {
+                Debug.Log ("freeze: " );
+                velocity = velocity/8;
             }
         }
     }
