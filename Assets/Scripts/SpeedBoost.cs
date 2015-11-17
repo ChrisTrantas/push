@@ -8,4 +8,10 @@ public class SpeedBoost : Item
         health = 0.0f;
         speed = 2.0f;
     }
+
+	public void Start()
+	{
+		this.GetComponent<Item> ().speed = speed;
+		this.GetComponent<Item> ().health = health;
+	}
 }

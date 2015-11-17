@@ -17,6 +17,7 @@ public class Character1Script : MonoBehaviour
 
     private float health;
     private float speed = 1.0f;
+	private bool veloCut=false;
 
     private Stack<Item> itemStack = new Stack<Item>();
 
@@ -26,14 +27,16 @@ public class Character1Script : MonoBehaviour
         StartCoroutine("ItemEffectTimer");
         health += item.health;
         speed *= item.speed;
+		veloCut = item.veloCut;
     }
 
     IEnumerator ItemEffectTimer()
     {
+		yield return new WaitForSeconds(3.0f);
         Item item = itemStack.Pop();
         health -= item.health;
         speed /= item.speed;
-        yield return new WaitForSeconds(0.5f);
+		veloCut = false;
     }
 
     // Update is called once per frame
@@ -46,19 +49,19 @@ public class Character1Script : MonoBehaviour
             //Getting player input and incrementing acceleration
             if (Input.GetKey(KeyCode.A))
             {
-                acceleration += (transform.right * -.001f);
+                acceleration += (Vector3.right * -.001f);
             }
             if (Input.GetKey(KeyCode.D))
             {
-				acceleration += (transform.right * .001f);
+				acceleration += (Vector3.right * .001f);
             }
             if (Input.GetKey(KeyCode.S))
             {
-				acceleration += (transform.forward * -.001f);
+				acceleration += (Vector3.forward * -.001f);
             }
             if (Input.GetKey(KeyCode.W))
             {
-				acceleration += (transform.forward * .001f);
+				acceleration += (Vector3.forward * .001f);
             }
         }
         if (PlayerNumber == 1)
@@ -66,39 +69,39 @@ public class Character1Script : MonoBehaviour
             //Getting player input
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                acceleration += (transform.right * -.001f);
+				acceleration += (Vector3.right * -.001f);
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                acceleration += (transform.right * .001f);
+				acceleration += (Vector3.right * .001f);
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                acceleration += (transform.forward * -.001f);
+				acceleration += (Vector3.forward * -.001f);
             }
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                acceleration += (transform.forward * .001f);
+				acceleration += (Vector3.forward * .001f);
             }
         }
         if (PlayerNumber == 2)
         {
             //Getting player input
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKey(KeyCode.Keypad4))
             {
-                acceleration += (transform.right * -.001f);
+				acceleration += (Vector3.right * -.001f);
             }
-            if (Input.GetKey(KeyCode.H))
+            if (Input.GetKey(KeyCode.Keypad6))
             {
-                acceleration += (transform.right * .001f);
+				acceleration += (Vector3.right * .001f);
             }
-            if (Input.GetKey(KeyCode.G))
+            if (Input.GetKey(KeyCode.Keypad5))
             {
-                acceleration += (transform.forward * -.001f);
+				acceleration += (Vector3.forward * -.001f);
             }
-            if (Input.GetKey(KeyCode.T))
+            if (Input.GetKey(KeyCode.Keypad8))
             {
-                acceleration += (transform.forward * .001f);
+				acceleration += (Vector3.forward * .001f);
             }
         }
         if (PlayerNumber == 3)
@@ -106,41 +109,37 @@ public class Character1Script : MonoBehaviour
             //Getting player input
             if (Input.GetKey(KeyCode.J))
             {
-                acceleration += (transform.right * -.001f);
+				acceleration += (Vector3.right * -.001f);
             }
             if (Input.GetKey(KeyCode.L))
             {
-                acceleration += (transform.right * .001f);
+				acceleration += (Vector3.right * .001f);
             }
             if (Input.GetKey(KeyCode.K))
             {
-                acceleration += (transform.forward * -.001f);
+				acceleration += (Vector3.forward * -.001f);
             }
             if (Input.GetKey(KeyCode.I))
             {
-                acceleration += (transform.forward * .001f);
+				acceleration += (Vector3.forward * .001f);
             }
         }
 
-        /*if (PlayerNumber == 0) {
-            Debug.Log ("Player 0 Velo: " + velocity.magnitude);
-        }
-        if (PlayerNumber == 1) {
-            Debug.Log ("Player 1 Velo: " + velocity.magnitude);
-        }*/
-
         //Clamping the velocity so players can't go too fast
         Vector3.ClampMagnitude(velocity, 1);
-
-
+	
         //Adding the acceleration from this update to the overall velocity.
-        velocity += acceleration * speed;
+		velocity += acceleration * speed;
+
 
         //Zeroing the velocity for the next update
         acceleration = Vector3.zero;
 
-        //Adding the velocity to the object's overall position
-        transform.position += velocity;
+		if (!veloCut) {
+			//Adding the velocity to the object's overall position
+			transform.position += velocity;
+		}
+
     }
 
     void ResolveBounce(Vector3 newVelo)
@@ -180,16 +179,12 @@ public class Character1Script : MonoBehaviour
 				velocity = Vector3.zero;
 			}
 			*/
-            if (col.gameObject.tag == "freeze")
-            {
-                Debug.Log ("freeze: " );
-                velocity = velocity/8;
-            }
         }
     }
 
-    void OnCollisionExit()
+	void OnCollisionExit(Collision col)
     {
+		if (col.gameObject.tag == "Player")
 		velocitySwapped = false;
     }
 
