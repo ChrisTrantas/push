@@ -63,6 +63,10 @@ public class Character1Script : MonoBehaviour
             {
 				acceleration += (Vector3.forward * .001f);
             }
+			acceleration+= Vector3.forward *-Input.GetAxis("P1MoveY")* .001f;
+			acceleration+= Vector3.right *Input.GetAxis("P1MoveX")* .001f;
+			transform.forward = new Vector3(Input.GetAxis("P1MoveX"),0,-Input.GetAxis("P1MoveY"));
+
         }
         if (PlayerNumber == 1)
         {
@@ -83,6 +87,9 @@ public class Character1Script : MonoBehaviour
             {
 				acceleration += (Vector3.forward * .001f);
             }
+			acceleration+= Vector3.forward *-Input.GetAxis("P2MoveY")* .001f;
+			acceleration+= Vector3.right *Input.GetAxis("P2MoveX")* .001f;
+			transform.forward = new Vector3(Input.GetAxis("P2MoveX"),0,-Input.GetAxis("P2MoveY"));
         }
         if (PlayerNumber == 2)
         {
@@ -103,6 +110,9 @@ public class Character1Script : MonoBehaviour
             {
 				acceleration += (Vector3.forward * .001f);
             }
+			acceleration+= Vector3.forward *-Input.GetAxis("P3MoveY")* .001f;
+			acceleration+= Vector3.right *Input.GetAxis("P3MoveX")* .001f;
+			transform.forward = new Vector3(Input.GetAxis("P3MoveX"),0,-Input.GetAxis("P3MoveY"));
         }
         if (PlayerNumber == 3)
         {
@@ -123,6 +133,9 @@ public class Character1Script : MonoBehaviour
             {
 				acceleration += (Vector3.forward * .001f);
             }
+			acceleration+= Vector3.forward *-Input.GetAxis("P4MoveY")* .001f;
+			acceleration+= Vector3.right *Input.GetAxis("P4MoveX")* .001f;
+			transform.forward = new Vector3(Input.GetAxis("P4MoveX"),0,-Input.GetAxis("P4MoveY"));
         }
 
         //Clamping the velocity so players can't go too fast
@@ -135,10 +148,11 @@ public class Character1Script : MonoBehaviour
         //Zeroing the velocity for the next update
         acceleration = Vector3.zero;
 
-		if (!veloCut) {
-			//Adding the velocity to the object's overall position
-			transform.position += velocity;
+		if (veloCut) {
+			velocity = Vector3.zero;
 		}
+		//Adding the velocity to the object's overall position
+		transform.position += velocity;
 
     }
 
