@@ -10,8 +10,8 @@ public class Item : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            Character1Script player = col.gameObject.GetComponent<Character1Script>();
-            player.ApplyItem(this);
+            Character1Script playerScript = col.gameObject.GetComponent<Character1Script>();
+            playerScript.ApplyItem(this);
 
             Destroy(this.gameObject);
         }

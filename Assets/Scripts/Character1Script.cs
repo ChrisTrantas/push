@@ -50,15 +50,15 @@ public class Character1Script : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.D))
             {
-                acceleration += (transform.right * .001f);
+				acceleration += (transform.right * .001f);
             }
             if (Input.GetKey(KeyCode.S))
             {
-                acceleration += (transform.forward * -.001f);
+				acceleration += (transform.forward * -.001f);
             }
             if (Input.GetKey(KeyCode.W))
             {
-                acceleration += (transform.forward * .001f);
+				acceleration += (transform.forward * .001f);
             }
         }
         if (PlayerNumber == 1)
@@ -159,11 +159,36 @@ public class Character1Script : MonoBehaviour
                 col.gameObject.GetComponent<Character1Script>().ResolveBounce(((col.transform.position - transform.position).normalized) * velocity.magnitude * .8f);
                 ResolveBounce(((transform.position - col.transform.position).normalized) * tempVec.magnitude * .8f);
             }
+			/* This code does not work at this moment
+			if(col.gameObject.tag == "Shockwave")
+			{
+				GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+				foreach (GameObject playerObject in players) 
+				{
+					Vector3 push = Vector3.zero;
+					if(playerObject.GetComponent<Character1Script>().PlayerNumber != PlayerNumber)
+					{
+						push = (playerObject.transform.position - transform.position);
+						if(Vector3.Distance(playerObject.transform.position, transform.position) < 10.0f)
+						{
+							push *= (0.1f / Vector3.Distance(playerObject.transform.position, transform.position));
+							playerObject.GetComponent<Character1Script>().SetAcceleration(push);
+						}
+					}
+				}
+				velocity = Vector3.zero;
+			}
+			*/
         }
     }
 
     void OnCollisionExit()
     {
-        velocitySwapped = false;
+		velocitySwapped = false;
     }
+
+	public void SetAcceleration(Vector3 newAcceleration)
+	{
+		acceleration += newAcceleration;
+	}
 }
