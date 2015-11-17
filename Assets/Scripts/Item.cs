@@ -13,6 +13,8 @@ public class Item : MonoBehaviour
             Character1Script playerScript = col.gameObject.GetComponent<Character1Script>();
             playerScript.ApplyItem(this);
 
+            Character1Script player = col.gameObject.GetComponent<Character1Script>();
+            player.ApplyItem(this);
             Destroy(this.gameObject);
         }
     }
