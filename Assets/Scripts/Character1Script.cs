@@ -16,8 +16,11 @@ public class Character1Script : MonoBehaviour
     private bool velocitySwapped = false;
 
     private float health;
-    private float speed = 1.0f;
+    private float speed = 1.5f;
 	private bool veloCut=false;
+	private bool prevBoost;
+	private float timerElapsed;
+	private float timerFull =2.0f;
 
     private Stack<Item> itemStack = new Stack<Item>();
 
@@ -37,6 +40,7 @@ public class Character1Script : MonoBehaviour
         health -= item.health;
         speed /= item.speed;
 		veloCut = false;
+		prevBoost = false;
     }
 
     // Update is called once per frame
@@ -50,22 +54,35 @@ public class Character1Script : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 acceleration += (Vector3.right * -.001f);
+				transform.forward = new Vector3(-1,0,0);
             }
             if (Input.GetKey(KeyCode.D))
             {
 				acceleration += (Vector3.right * .001f);
+				transform.forward = new Vector3(1,0,0);
             }
             if (Input.GetKey(KeyCode.S))
             {
 				acceleration += (Vector3.forward * -.001f);
+				transform.forward = new Vector3(0,0,-1);
             }
             if (Input.GetKey(KeyCode.W))
             {
 				acceleration += (Vector3.forward * .001f);
+				transform.forward = new Vector3(0,0,1);
             }
+			if (Input.GetKey(KeyCode.E) || Input.GetButton("P1Button"))
+			{
+				if(!prevBoost){
+					Boost ();
+					prevBoost=true;
+				}
+			}
 			acceleration+= Vector3.forward *-Input.GetAxis("P1MoveY")* .001f;
 			acceleration+= Vector3.right *Input.GetAxis("P1MoveX")* .001f;
-			transform.forward = new Vector3(Input.GetAxis("P1MoveX"),0,-Input.GetAxis("P1MoveY"));
+			if(Input.GetAxis("P1MoveX")>.1 || Input.GetAxis("P1MoveY")>.1 || Input.GetAxis("P1MoveX")<-.1 || Input.GetAxis("P1MoveY")<-.1){
+				transform.forward = new Vector3(Input.GetAxis("P1MoveX"),0,-Input.GetAxis("P1MoveY"));
+			}
 
         }
         if (PlayerNumber == 1)
@@ -74,22 +91,35 @@ public class Character1Script : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftArrow))
             {
 				acceleration += (Vector3.right * -.001f);
+				transform.forward = new Vector3(-1,0,0);
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
 				acceleration += (Vector3.right * .001f);
+				transform.forward = new Vector3(1,0,0);
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
 				acceleration += (Vector3.forward * -.001f);
+				transform.forward = new Vector3(0,0,-1);
             }
             if (Input.GetKey(KeyCode.UpArrow))
             {
 				acceleration += (Vector3.forward * .001f);
+				transform.forward = new Vector3(0,0,1);
             }
+			if (Input.GetKey(KeyCode.End) || Input.GetButton("P2Button"))
+			{
+				if(!prevBoost){
+					Boost ();
+					prevBoost=true;
+				}
+			}
 			acceleration+= Vector3.forward *-Input.GetAxis("P2MoveY")* .001f;
 			acceleration+= Vector3.right *Input.GetAxis("P2MoveX")* .001f;
-			transform.forward = new Vector3(Input.GetAxis("P2MoveX"),0,-Input.GetAxis("P2MoveY"));
+			if(Input.GetAxis("P2MoveX")>.1 || Input.GetAxis("P2MoveY")>.1 || Input.GetAxis("P2MoveX")<-.1 || Input.GetAxis("P2MoveY")<-.1){
+				transform.forward = new Vector3(Input.GetAxis("P2MoveX"),0,-Input.GetAxis("P2MoveY"));
+			}
         }
         if (PlayerNumber == 2)
         {
@@ -97,22 +127,35 @@ public class Character1Script : MonoBehaviour
             if (Input.GetKey(KeyCode.Keypad4))
             {
 				acceleration += (Vector3.right * -.001f);
+				transform.forward = new Vector3(-1,0,0);
             }
             if (Input.GetKey(KeyCode.Keypad6))
             {
 				acceleration += (Vector3.right * .001f);
+				transform.forward = new Vector3(1,0,0);
             }
             if (Input.GetKey(KeyCode.Keypad5))
             {
 				acceleration += (Vector3.forward * -.001f);
+				transform.forward = new Vector3(0,0,-1);
             }
             if (Input.GetKey(KeyCode.Keypad8))
             {
 				acceleration += (Vector3.forward * .001f);
+				transform.forward = new Vector3(0,0,1);
             }
+			if (Input.GetKey(KeyCode.Keypad9) || Input.GetButton("P3Button"))
+			{
+				if(!prevBoost){
+					Boost ();
+					prevBoost=true;
+				}
+			}
 			acceleration+= Vector3.forward *-Input.GetAxis("P3MoveY")* .001f;
 			acceleration+= Vector3.right *Input.GetAxis("P3MoveX")* .001f;
-			transform.forward = new Vector3(Input.GetAxis("P3MoveX"),0,-Input.GetAxis("P3MoveY"));
+			if(Input.GetAxis("P2MoveX")>.1 || Input.GetAxis("P2MoveY")>.1 || Input.GetAxis("P2MoveX")<-.1 || Input.GetAxis("P2MoveY")<-.1){
+				transform.forward = new Vector3(Input.GetAxis("P3MoveX"),0,-Input.GetAxis("P3MoveY"));
+			}
         }
         if (PlayerNumber == 3)
         {
@@ -120,22 +163,35 @@ public class Character1Script : MonoBehaviour
             if (Input.GetKey(KeyCode.J))
             {
 				acceleration += (Vector3.right * -.001f);
+				transform.forward = new Vector3(-1,0,0);
             }
             if (Input.GetKey(KeyCode.L))
             {
 				acceleration += (Vector3.right * .001f);
+				transform.forward = new Vector3(1,0,0);
             }
             if (Input.GetKey(KeyCode.K))
             {
 				acceleration += (Vector3.forward * -.001f);
+				transform.forward = new Vector3(0,0,-1);
             }
             if (Input.GetKey(KeyCode.I))
             {
 				acceleration += (Vector3.forward * .001f);
+				transform.forward = new Vector3(0,0,1);
             }
+			if (Input.GetKey(KeyCode.O) || Input.GetButton("P4Button"))
+			{
+				if(!prevBoost){
+					Boost ();
+					prevBoost=true;
+				}
+			}
 			acceleration+= Vector3.forward *-Input.GetAxis("P4MoveY")* .001f;
 			acceleration+= Vector3.right *Input.GetAxis("P4MoveX")* .001f;
-			transform.forward = new Vector3(Input.GetAxis("P4MoveX"),0,-Input.GetAxis("P4MoveY"));
+			if(Input.GetAxis("P4MoveX")>.1 || Input.GetAxis("P4MoveY")>.1 || Input.GetAxis("P4MoveX")<-.1 || Input.GetAxis("P4MoveY")<-.1){
+				transform.forward = new Vector3(Input.GetAxis("P4MoveX"),0,-Input.GetAxis("P4MoveY"));
+			}
         }
 
         //Clamping the velocity so players can't go too fast
@@ -154,6 +210,13 @@ public class Character1Script : MonoBehaviour
 		//Adding the velocity to the object's overall position
 		transform.position += velocity;
 
+		if (prevBoost) {
+			timerElapsed += Time.deltaTime;
+			if(timerElapsed>timerFull){
+				prevBoost=false;
+				timerElapsed=0;
+			}
+		}
     }
 
     void ResolveBounce(Vector3 newVelo)
@@ -173,6 +236,10 @@ public class Character1Script : MonoBehaviour
                 col.gameObject.GetComponent<Character1Script>().ResolveBounce(((col.transform.position - transform.position).normalized) * velocity.magnitude * .8f);
                 ResolveBounce(((transform.position - col.transform.position).normalized) * tempVec.magnitude * .8f);
             }
+			if (col.gameObject.tag == "Bouncer")
+			{
+				velocity = velocity*-1;
+			}
 			/* This code does not work at this moment
 			if(col.gameObject.tag == "Shockwave")
 			{
@@ -205,5 +272,9 @@ public class Character1Script : MonoBehaviour
 	public void SetAcceleration(Vector3 newAcceleration)
 	{
 		acceleration += newAcceleration;
+	}
+
+	private void Boost(){
+		velocity += transform.forward *.15f;
 	}
 }

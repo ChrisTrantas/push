@@ -16,14 +16,7 @@ public class Spawner : MonoBehaviour {
 	void Update () {
 		timer += Time.deltaTime;
 		if (timer > 7) {
-			Debug.Log ("Spawn");
-			if(Random.Range(0,2)==0){
-				SpeedBoost.transform.position = transform.position;
-				IceBoost.transform.position= new Vector3(-100000,10000,100000);
-			}else{
-				IceBoost.transform.position = transform.position;
-				SpeedBoost.transform.position= new Vector3(-100000,10000,100000);
-			}
+			IceBoost.transform.position = new Vector3(transform.position.x + Random.Range(0,10), transform.position.y, transform.position.z + Random.Range(0,10));
 			timer=0;
 		}
 	}
