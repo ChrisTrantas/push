@@ -156,7 +156,7 @@ public class Character1Script : MonoBehaviour
 			}
 			acceleration+= Vector3.forward *-Input.GetAxis("P3MoveY")* .001f;
 			acceleration+= Vector3.right *Input.GetAxis("P3MoveX")* .001f;
-			if(Input.GetAxis("P2MoveX")>.1 || Input.GetAxis("P2MoveY")>.1 || Input.GetAxis("P2MoveX")<-.1 || Input.GetAxis("P2MoveY")<-.1){
+			if(Input.GetAxis("P3MoveX")>.1 || Input.GetAxis("P3MoveY")>.1 || Input.GetAxis("P3MoveX")<-.1 || Input.GetAxis("P3MoveY")<-.1){
 				transform.forward = new Vector3(Input.GetAxis("P3MoveX"),0,-Input.GetAxis("P3MoveY"));
 			}
         }
