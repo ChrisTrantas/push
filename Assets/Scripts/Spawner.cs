@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour {
 	
-	public GameObject SpeedBoost;
+	public GameObject ShockwaveBoost;
 	public GameObject IceBoost;
 	private float timer;
 	
@@ -15,9 +15,20 @@ public class Spawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		timer += Time.deltaTime;
-		if (timer > 7) {
-			IceBoost.transform.position = new Vector3(transform.position.x + Random.Range(0,10), transform.position.y, transform.position.z + Random.Range(0,10));
-			timer=0;
-		}
+        if (timer > 4)
+        {
+            float randomSpawn = Random.Range(0.0f, 8.0f);
+            if (randomSpawn < 2)
+            {
+                IceBoost.transform.position = transform.position + new Vector3(Random.Range(-8.0f, 8.0f), 0.0f, Random.Range(-8.0f, 8.0f));
+                ShockwaveBoost.transform.position = new Vector3(-100000, 10000, 100000);
+            }
+            else
+            {
+                ShockwaveBoost.transform.position = transform.position + new Vector3(Random.Range(-8.0f, 8.0f), 0.0f, Random.Range(-8.0f, 8.0f));
+                IceBoost.transform.position = new Vector3(-100000, 10000, 100000);
+            }
+            timer = 0;
+        }
 	}
 }

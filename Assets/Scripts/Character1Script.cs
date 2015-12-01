@@ -7,6 +7,10 @@ public class Character1Script : MonoBehaviour
 
     //This number represents the number of the player to be used for control options
     public int PlayerNumber;
+
+    public float accelSpeed;
+    private float friction = 1.01f;
+
     //The acceleration for movement
     private Vector3 acceleration;
     //The velocity for movement
@@ -217,6 +221,8 @@ public class Character1Script : MonoBehaviour
 				timerElapsed=0;
 			}
 		}
+
+        velocity /= friction;
     }
 
     void ResolveBounce(Vector3 newVelo)
