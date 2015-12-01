@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		timer += Time.deltaTime;
-        if (timer > 4)
+        if (timer > 5)
         {
             float randomSpawn = Random.Range(0.0f, 8.0f);
             if (randomSpawn < 2)
@@ -25,7 +25,7 @@ public class Spawner : MonoBehaviour {
             }
             else
             {
-                ShockwaveBoost.transform.position = transform.position + new Vector3(Random.Range(-8.0f, 8.0f), 0.0f, Random.Range(-8.0f, 8.0f));
+                ShockwaveBoost.transform.position = transform.position + new Vector3(Random.Range(-12.0f, 12.0f), 0.0f, Random.Range(-12.0f, 12.0f));
                 IceBoost.transform.position = new Vector3(-100000, 10000, 100000);
             }
             timer = 0;

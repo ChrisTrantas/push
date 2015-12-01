@@ -7,8 +7,7 @@ public class Character1Script : MonoBehaviour
 
     //This number represents the number of the player to be used for control options
     public int PlayerNumber;
-
-    public float accelSpeed;
+	
     private float friction = 1.01f;
 
     //The acceleration for movement
@@ -20,7 +19,7 @@ public class Character1Script : MonoBehaviour
     private bool velocitySwapped = false;
 
     private float health;
-    private float speed = 1.5f;
+    public float speed;
 	private bool veloCut=false;
 	private bool prevBoost;
 	private float timerElapsed;
@@ -244,28 +243,12 @@ public class Character1Script : MonoBehaviour
             }
 			if (col.gameObject.tag == "Bouncer")
 			{
-				velocity = velocity*-1;
+				Vector3 bounceForce = transform.position-col.transform.position;
+				bounceForce = Vector3.Project(velocity, bounceForce);
+				bounceForce *= -2f;
+				bounceForce.y=0;
+				velocity=bounceForce;
 			}
-			/* This code does not work at this moment
-			if(col.gameObject.tag == "Shockwave")
-			{
-				GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-				foreach (GameObject playerObject in players) 
-				{
-					Vector3 push = Vector3.zero;
-					if(playerObject.GetComponent<Character1Script>().PlayerNumber != PlayerNumber)
-					{
-						push = (playerObject.transform.position - transform.position);
-						if(Vector3.Distance(playerObject.transform.position, transform.position) < 10.0f)
-						{
-							push *= (0.1f / Vector3.Distance(playerObject.transform.position, transform.position));
-							playerObject.GetComponent<Character1Script>().SetAcceleration(push);
-						}
-					}
-				}
-				velocity = Vector3.zero;
-			}
-			*/
         }
     }
 
