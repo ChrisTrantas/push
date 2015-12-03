@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour {
         if (timer > 5)
         {
             float randomSpawn = Random.Range(0.0f, 8.0f);
-            if (randomSpawn < 2)
+            if (randomSpawn < 9)
             {
                 IceBoost.transform.position = transform.position + new Vector3(Random.Range(-8.0f, 8.0f), 0.0f, Random.Range(-8.0f, 8.0f));
                 ShockwaveBoost.transform.position = new Vector3(-100000, 10000, 100000);
