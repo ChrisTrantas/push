@@ -198,7 +198,7 @@ public class Character1Script : MonoBehaviour
         }
 
         //Clamping the velocity so players can't go too fast
-        Vector3.ClampMagnitude(velocity, .05f);
+        Vector3.ClampMagnitude(velocity, .03f);
 	
         //Adding the acceleration from this update to the overall velocity.
 		velocity += acceleration * speed;

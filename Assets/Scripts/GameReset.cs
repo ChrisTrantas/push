@@ -34,6 +34,11 @@ public class GameReset : MonoBehaviour {
 			Player4.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 			Player4.transform.position= new Vector3(0f,-2.72f,6f);
 			deathCount=0;
+
+			GameObject[] bouncers = GameObject.FindGameObjectsWithTag("Bouncer");
+			for(int i =0;i<bouncers.Length;i++){
+				bouncers[i].GetComponent<BumperScript>().Reset();
+			}
 		}
 	}
 
