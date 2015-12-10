@@ -244,8 +244,8 @@ public class Character1Script : MonoBehaviour
 			if (col.gameObject.tag == "Bouncer")
 			{
 				Vector3 bounceForce = transform.position-col.transform.position;
-				bounceForce = Vector3.Project(velocity, bounceForce);
-				bounceForce *= -2f;
+				bounceForce.Normalize();
+				bounceForce *= .3f;
 				bounceForce.y=0;
 				velocity=bounceForce;
 			}
